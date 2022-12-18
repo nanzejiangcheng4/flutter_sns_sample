@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_sns_sample/model/account.dart';
 import 'package:flutter_sns_sample/model/post.dart';
+import 'package:intl/intl.dart';
 
 class TimeLinePage extends StatefulWidget {
   const TimeLinePage({Key? key}) : super(key: key);
@@ -50,13 +51,56 @@ class _TimeLinePageState extends State<TimeLinePage> {
       body: ListView.builder(
         itemCount: postList.length,
         itemBuilder: (context, index) {
-          return Row(
-            children: [
-              CircleAvatar(
-                radius: 22,
-                foregroundImage: NetworkImage(myAccount.imagePath),
-              )
-            ],
+          return Container(
+            decoration: BoxDecoration(
+              border: index == 0
+                  ? const Border(
+                      top: BorderSide(color: Colors.grey, width: 0),
+                      bottom: BorderSide(color: Colors.grey, width: 0),
+                    )
+                  : const Border(
+                      bottom: BorderSide(color: Colors.grey, width: 0),
+                    ),
+            ),
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+            child: Row(
+              children: [
+                CircleAvatar(
+                  radius: 22,
+                  foregroundImage: NetworkImage(myAccount.imagePath),
+                ),
+                Expanded(
+                  child: Container(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                Text(
+                                  myAccount.name,
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                Text(
+                                  '@${myAccount.userId}',
+                                  style: const TextStyle(color: Colors.grey),
+                                ),
+                              ],
+                            ),
+                            Text(DateFormat('M/d/yy')
+                                .format(postList[index].createdTime!)),
+                          ],
+                        ),
+                        Text(postList[index].content),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
           );
         },
       ),
