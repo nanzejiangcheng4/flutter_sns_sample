@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sns_sample/view/screen.dart';
+import 'package:flutter_sns_sample/view/start_up/createAccountPage.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -61,7 +62,12 @@ class _LoginPageState extends State<LoginPage> {
                       style: TextStyle(color: Colors.blue),
                       recognizer: TapGestureRecognizer()
                         ..onTap = () {
-                          print('アカウント作成');
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => CreateAccountPage(),
+                            ),
+                          );
                         },
                     ),
                   ],
