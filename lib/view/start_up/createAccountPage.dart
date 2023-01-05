@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_sns_sample/utils/authentification.dart';
 import 'package:image_picker/image_picker.dart';
 
 class CreateAccountPage extends StatefulWidget {
@@ -106,14 +107,18 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                 height: 50,
               ),
               ElevatedButton(
-                onPressed: () {
+                onPressed: () async {
                   if (nameController.text.isNotEmpty &&
                       userIdController.text.isNotEmpty &&
                       selfIntroductionController.text.isNotEmpty &&
                       emailController.text.isNotEmpty &&
                       passController.text.isNotEmpty &&
                       image != null) {
-                    Navigator.pop(context);
+                    var result = await Authentification.signUp(
+                        email: emailController.text, pass: passController.text);
+                    if (result == true) {
+                      Navigator.pop(context);
+                    }
                   }
                 },
                 child: Text('アカウント作成'),
