@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sns_sample/model/account.dart';
 import 'package:flutter_sns_sample/model/post.dart';
@@ -18,8 +19,8 @@ class _AccountPageState extends State<AccountPage> {
     userId: 'flutter_labo',
     imagePath:
         'https://assets.st-note.com/production/uploads/images/58075596/profile_7d12166cbb91dd3ff25bbed3898bdd76.png?fit=bounds&format=jpeg&quality=85&width=330',
-    createdTime: DateTime.now(),
-    updatedTime: DateTime.now(),
+    createdTime: Timestamp.now(),
+    updatedTime: Timestamp.now(),
   );
 
   List<Post> postList = [
